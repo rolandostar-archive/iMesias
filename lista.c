@@ -51,7 +51,7 @@ void destroy( lista * q ){
    *q = NULL;
 }
 
-boolean empty( lista q ){
+myBoolean empty( lista q ){
    if( q-> F == q-> I && q-> F == NULL)
       return TRUE;
    return FALSE;

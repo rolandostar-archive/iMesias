@@ -1,13 +1,23 @@
 #include "lista.h"
-#include<stdio.h>
-#include<stdlib.h>
-#include<string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <windows.h>
+#include <string.h>
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
+
+// Funciones Prototipo
+int printc(const char *s);
+void ShowConsoleCursor(int showFlag);
 
 lista myList;
 
 int main(int argc, char *argv[]) {
+  
+  printc("iMesias Music Player\n");
+   
+   /*
+   
    int n,i;
    CANCION song;
 
@@ -41,6 +51,24 @@ int main(int argc, char *argv[]) {
       printf("Album : %s \n",song.album);
       printf("Duracion : %s \n",song.duracion);
    }
+   
+   */
    //system("PAUSE");
    return 0;
+}
+
+void ShowConsoleCursor(int showFlag) { // set the cursor visibility
+    HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO     cursorInfo;
+    GetConsoleCursorInfo(out, &cursorInfo);
+    cursorInfo.bVisible = showFlag; 
+    SetConsoleCursorInfo(out, &cursorInfo);
+}
+
+int printc(const char *s) {
+  int n = strlen(s); int width = 80; // Ancho de la consola. Por defecto: 80
+  int pad = (n >= width) ? 0 : (width - n) / 2;
+  printf("%*.*s%s", pad, pad, " ", s);
+  //printf("%d\n",pad); // Debug
+  return pad; // En caso de necesitar coordenadas.
 }

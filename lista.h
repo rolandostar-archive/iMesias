@@ -18,11 +18,11 @@ struct cab{
 typedef struct nodo CANCION;
 typedef struct cab CABECERA;
 typedef CABECERA * lista;
-typedef enum bool{FALSE, TRUE} boolean;
+typedef enum bool{FALSE, TRUE} myBoolean;
 typedef enum men{NO_MEMORY,OK} mensaje;
 
 mensaje create(lista *);
-boolean empty(lista);
+myBoolean empty(lista);
 void destroy(lista *);
 void clean(lista);
 int size(lista);
