@@ -1,4 +1,6 @@
 #include "lista.h"
+#include <conio.h>
+#include <conio2.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
@@ -13,9 +15,17 @@ void ShowConsoleCursor(int showFlag);
 lista myList;
 
 int main(int argc, char *argv[]) {
+
+/*SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED |
+                                                            FOREGROUND_GREEN | 
+                                                            FOREGROUND_INTENSITY | 
+                                                            BACKGROUND_BLUE);*/
+
+  printf("  _  __  __             _              \n (_)|  \\/  |  ___  ___ (_)  __ _  ___  \n | || |\\/| | / _ \\/ __|| | / _` |/ __| \n | || |  | ||  __/\\__ \\| || (_| |\\__ \\ \n |_||_|  |_| \\___||___/|_| \\__,_||___/ \n");
+  gotoxy(4,7); printf("Opciones");
+  gotoxy(3,8); system("COLOR 14");SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED); printf("Lorep ipsum dolo sit amet"); system("COLOR 14");
   
-  printc("iMesias Music Player\n");
-   
+  
    /*
    
    int n,i;
@@ -53,7 +63,7 @@ int main(int argc, char *argv[]) {
    }
    
    */
-   //system("PAUSE");
+   system("PAUSE");
    return 0;
 }
 
