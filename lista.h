@@ -1,3 +1,6 @@
+#ifndef LISTA_H
+#define LISTA_H
+
 struct nodo{
     char artista[70];
     char nombre[70];
@@ -11,7 +14,6 @@ struct cab{
     struct nodo *I, *F;
     int size;
 };
-
 
 typedef struct nodo CANCION;
 typedef struct cab CABECERA;
@@ -29,3 +31,5 @@ CANCION pop_der(lista);
 mensaje push_izq(lista, CANCION);
 mensaje push_der(lista, CANCION);
 mensaje push_pos(lista, int, CANCION);
+
+#endif
