@@ -2,17 +2,17 @@
 #define LISTA_H
 
 struct nodo{
-    char artista[70];
-    char nombre[70];
-    char album[70];
-    char duracion[5];
-    struct nodo * sig;
-    struct nodo * ant;
+	char artista[70];
+	char nombre[70];
+	char album[70];
+	char duracion[5];
+	struct nodo * sig;
+	struct nodo * ant;
 };
 
 struct cab{
-    struct nodo *I, *F;
-    int size;
+	struct nodo *I, *F;
+	int size;
 };
 
 typedef struct nodo CANCION;
@@ -25,9 +25,11 @@ mensaje create(lista *);
 boolean empty(lista);
 void destroy(lista *);
 void clean(lista);
+void data(lista);
 int size(lista);
 CANCION pop_izq(lista);
 CANCION pop_der(lista);
+CANCION pop_pos(lista, int);
 mensaje push_izq(lista, CANCION);
 mensaje push_der(lista, CANCION);
 mensaje push_pos(lista, int, CANCION);
