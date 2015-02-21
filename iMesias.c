@@ -7,7 +7,7 @@
 
 lista myList;
 int main(int argc, char *argv[]) {
-	int n,i;
+	int n,i,pos;
 	CANCION song;
 	
 	//Meter/Sacar contrarios, cola :D
@@ -24,22 +24,37 @@ int main(int argc, char *argv[]) {
 		printf("Duracion [Sin Espacio]: "); scanf("%s",song.duracion);
 		//printf("Estoy metiendo por Izquierda\n");
 		//push_izq(myList,song);
-		//printf("Estoy metiendo por Derecha\n");
-		//push_der(myList,song);
+		printf("Estoy metiendo por Derecha\n");
+		push_der(myList,song);
 		//printf("Estoy metiendo siempre al final, probando PushPos(N)\n");
 		//push_pos(myList,n,song); // si sirve :'D
 		//printf("Estoy metiendo siempre al inicoi, probando PushPos(0)\n");
 		//push_pos(myList,0,song); //A huevo, así tambien sirve.. Viene el bueno D:
-		int pos; 
-		printf("En que pos de la lista lo quieres\n [Si tienes A B C y metes en 2 D, queda A B D C\n");
-		scanf("%d",&pos);
-		push_pos(myList,pos,song);
+		//printf("En que pos de la lista lo quieres\n [Si tienes A B C y metes en 2 D, queda A B D C\n");
+		//scanf("%d",&pos);
+		//push_pos(myList,pos,song);
 		// A HUEVO *-* Si Sirve
 		printf("----------------------------------------------------------\n");
 	}
-	printf("\n\n La lista quedo con %d elementos\n\n",size(myList));
+	printf("\n\n La lista quedo con %d elementos, son: \n\n",size(myList));
 	
-	while( !empty(myList) ){
+	data(myList);
+	
+	if(!empty(myList)){
+		printf("Indice del elemento a sacar\n");
+		printf("[Si tienes A B C D E y sacas el 2, queda A C D E]\n\n");
+		scanf("%d",&pos);
+		song = pop_pos(myList,pos);
+		printf("El elemento que estaba en la pos 3 es: \n");
+		printf("Nombre : %s \n",song.nombre);
+		printf("Artista : %s \n",song.artista);
+		printf("Album : %s \n",song.album);
+		printf("Duracion : %s \n",song.duracion);
+		printf("Y la lista quedo con %d elementos\n",size(myList));
+		data(myList);
+	}
+	
+	/*while( !empty(myList) ){
 		//song = pop_der(myList);
 		song = pop_izq(myList);
 		printf("-------------------------------------\n");
@@ -49,7 +64,7 @@ int main(int argc, char *argv[]) {
 		printf("Artista : %s \n",song.artista);
 		printf("Album : %s \n",song.album);
 		printf("Duracion : %s \n",song.duracion);
-	}
+	}*/
 	//system("PAUSE");
 	return 0;
 }
