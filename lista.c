@@ -60,9 +60,12 @@ boolean empty( lista q ){
 }
 
 void data(lista l){
+	//Si vacia, hago nada
 	if(l->I == NULL)
 		return;
+	//Si no, recorro desde el inicio ( aux ) hasta el final
 	CANCION * aux = l->I;
+	//Esto no entra cuando aux = fin
 	while( aux != l->F){
 		printf("********************************\n");
 		printf("Artista : %s\n",aux->artista);
@@ -71,7 +74,7 @@ void data(lista l){
 		printf("Duracion: %s\n",aux->duracion);
 		aux = aux->sig;
 	}
-	//Falta el ultimo
+	//Falta el ultimo, plt, lo imprimo
 	printf("********************************\n");
 	printf("Artista : %s\n",aux->artista);
 	printf("Cancion : %s\n",aux->nombre);
@@ -100,6 +103,7 @@ CANCION pop_der(lista l){
 	else{
 		l->F = temp.ant;
 		l->F->sig = NULL;
+		//Como saque un elemento, quito uno al tamaño
 		l-> size = l->size - 1;
 	}
 	temp.sig = temp.ant = NULL;
@@ -122,6 +126,7 @@ CANCION pop_izq(lista l){
 	else{
 		l->I = temp.sig;
 		l->I->ant = NULL;
+		//Como saque un elemento, quito uno al tamaño
 		l->size = l->size - 1;
 	}
 	temp.sig = temp.ant = NULL;
@@ -132,8 +137,11 @@ CANCION pop_pos(lista l, int pos){
 	//Si la posicion es mayor al num de elementos de la lista, quita el ultimo
 	//O si me dice que la quite el ultimo, pos lo quito xD
 	if(pos >= size(l))
+		//pop_der quita el ultimo (derecha) y me regresa un temp, entonces, eso regreso
 		return pop_der(l);
+	//Si quiero quitar el 1ro
 	else if(pos==1)
+		//pop_izq quita el primero (izquierda) y me regresa un temp, entonces, eso regreso
 		return pop_izq(l);
 	else{
 		//Pos -- poque lo manejamos de 0 a N - 1
@@ -147,12 +155,17 @@ CANCION pop_pos(lista l, int pos){
 			k++;
 		}
 		
+		//Temp es el nodo que voy a regresar
 		CANCION temp;
+		//Y es en donde se quedo el apuntador aux
 		temp = *aux;
+		//Muevo el anterior de temp, para que apunte al sig de temp y viceversa
 		(temp.ant)->sig = temp.sig;
 		(temp.sig)->ant = temp.ant;
+		//modifico los apuntadores de temp para no poder acceder a ellos desde afuera
 		temp.sig = temp.ant = NULL;
 		
+		//Como saque un elemento, quito uno al tamaño
 		l->size = l->size - 1;
 		return temp;		
 	}
@@ -186,6 +199,7 @@ mensaje push_der(lista l, CANCION song){
 		l->F->sig = temp;
 		l->F = temp;
 	}
+	//Sumo uno al tamaño de la lista
 	l->size = l->size + 1;
 	return OK;
 }
@@ -216,6 +230,7 @@ mensaje push_izq(lista l, CANCION song){
 		l->I->ant = temp;
 		l->I = temp;
 	}
+	//Sumo uno al tamaño de la lista
 	l->size = l->size + 1;
 	return OK;
 }
