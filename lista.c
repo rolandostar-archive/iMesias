@@ -5,18 +5,22 @@
 
 /*
 	typedef struct nodo CANCION;
-	typedef struct cab CABECERA;
 	typedef CABECERA * lista;
 	mensaje create(lista *);
 	boolean empty(lista);
 	void destroy(lista *);
 	void clean(lista);
+	void data(lista);
+	int size(lista);
 	CANCION pop_izq(lista);
 	CANCION pop_der(lista);
+	CANCION pop_pos(lista, int);
 	mensaje push_izq(lista, CANCION);
 	mensaje push_der(lista, CANCION);
 	mensaje push_pos(lista, int, CANCION);
 */
+
+// 		Funciones Basicas
 
 int size(lista l){
 	return l->size;
@@ -54,6 +58,31 @@ boolean empty( lista q ){
 		return TRUE;
 	return FALSE;
 }
+
+void data(lista l){
+	if(l->I == NULL)
+		return;
+	CANCION * aux = l->I;
+	while( aux != l->F){
+		printf("********************************\n");
+		printf("Artista : %s\n",aux->artista);
+		printf("Cancion : %s\n",aux->nombre);
+		printf("Album   : %s\n",aux->album);
+		printf("Duracion: %s\n",aux->duracion);
+		aux = aux->sig;
+	}
+	//Falta el ultimo
+	printf("********************************\n");
+	printf("Artista : %s\n",aux->artista);
+	printf("Cancion : %s\n",aux->nombre);
+	printf("Album   : %s\n",aux->album);
+	printf("Duracion: %s\n",aux->duracion);
+	printf("********************************\n");
+	return;
+}
+
+
+// 		Funciones Pop
 
 CANCION pop_der(lista l){
 	CANCION temp;
@@ -98,6 +127,38 @@ CANCION pop_izq(lista l){
 	temp.sig = temp.ant = NULL;
 	return temp;
 }
+
+CANCION pop_pos(lista l, int pos){
+	//Si la posicion es mayor al num de elementos de la lista, quita el ultimo
+	//O si me dice que la quite el ultimo, pos lo quito xD
+	if(pos >= size(l))
+		return pop_der(l);
+	else if(pos==1)
+		return pop_izq(l);
+	else{
+		//Pos -- poque lo manejamos de 0 a N - 1
+		pos--;
+		int k = 0;
+		//Inicialmente apunto al primer elemento
+		CANCION * aux = l->I;
+		// Si no he llegado a destino, me muevo
+		while(k<pos){
+			aux = aux->sig;
+			k++;
+		}
+		
+		CANCION temp;
+		temp = *aux;
+		(temp.ant)->sig = temp.sig;
+		(temp.sig)->ant = temp.ant;
+		temp.sig = temp.ant = NULL;
+		
+		l->size = l->size - 1;
+		return temp;		
+	}
+}
+
+// 		Funciones Push
 
 mensaje push_der(lista l, CANCION song){
 	//Creo el espacio para el nodo y veo si hay memoria
