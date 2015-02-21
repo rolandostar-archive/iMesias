@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
 	
 	data(myList);
 	
-	if(!empty(myList)){
+	if(!empty(myList)){ 
 		printf("Indice del elemento a sacar\n");
 		printf("[Si tienes A B C D E y sacas el 2, queda A C D E]\n\n");
 		scanf("%d",&pos);
