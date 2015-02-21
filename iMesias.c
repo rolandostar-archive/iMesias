@@ -15,6 +15,7 @@ void ShowConsoleCursor(int showFlag);
 lista myList;
 
 int main(int argc, char *argv[]) {
+system("COLOR 14");
 
 /*SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED |
                                                             FOREGROUND_GREEN | 
@@ -23,7 +24,7 @@ int main(int argc, char *argv[]) {
 
   printf("  _  __  __             _              \n (_)|  \\/  |  ___  ___ (_)  __ _  ___  \n | || |\\/| | / _ \\/ __|| | / _` |/ __| \n | || |  | ||  __/\\__ \\| || (_| |\\__ \\ \n |_||_|  |_| \\___||___/|_| \\__,_||___/ \n");
   gotoxy(4,7); printf("Opciones");
-  gotoxy(3,8); system("COLOR 14");SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED); printf("Lorep ipsum dolo sit amet"); system("COLOR 14");
+  gotoxy(3,8); SetConsoleTextAttribute (GetStdHandle(STD_OUTPUT_HANDLE), BACKGROUND_BLUE | BACKGROUND_GREEN | BACKGROUND_RED); printf("Lorep ipsum dolo sit amet");
   
   
    /*
@@ -70,8 +71,8 @@ int main(int argc, char *argv[]) {
 void ShowConsoleCursor(int showFlag) { // set the cursor visibility
     HANDLE out = GetStdHandle(STD_OUTPUT_HANDLE);
     CONSOLE_CURSOR_INFO     cursorInfo;
-    GetConsoleCursorInfo(out, &cursorInfo);
-    cursorInfo.bVisible = showFlag; 
+  GetConsoleCursorInfo(out, &cursorInfo);
+  cursorInfo.bVisible = showFlag; 
     SetConsoleCursorInfo(out, &cursorInfo);
 }
 
