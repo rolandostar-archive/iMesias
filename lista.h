@@ -1,4 +1,3 @@
-
 struct nodo{
     char artista[70];
     char nombre[70];

@@ -1,6 +1,6 @@
 #include "lista.h"
-#include<stdlib.h>
 #include<stdio.h>
+#include<stdlib.h>
 #include<string.h>
 
 /*
@@ -205,7 +205,7 @@ mensaje push_pos(lista l, int pos, CANCION song){
       strcpy(temp->artista,song.artista);
       strcpy(temp->nombre,song.nombre);
       strcpy(temp->album,song.album);
-      strcpy(temp->duracion,song.duracion
+      strcpy(temp->duracion,song.duracion);
 
       //el sig del temporal, es el sig de el aux
       temp->sig = aux->sig;
