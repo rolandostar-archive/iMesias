@@ -25,14 +25,14 @@ struct cab{
 typedef struct nodo CANCION;
 typedef struct cab CABECERA;
 typedef CABECERA * lista;
-typedef enum bool{FALSE, TRUE} boolean;
+typedef enum bool{FALSE, TRUE} myBoolean;
 typedef enum men{NO_MEMORY,OK} mensaje;
 
 //Funcion que inicializa la lista, dice que esta vacia y que el size = 0
 mensaje create(lista *);
 
 //Funcion que regresa 1 si la lista esta vacia, 0 si no
-boolean empty(lista);
+myBoolean empty(lista);
 
 //Funcion que borra TODOS los datos de la lista, la deja como nueva
 void destroy(lista *);
