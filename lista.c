@@ -3,6 +3,8 @@
 #include<stdlib.h>
 #include<string.h>
 
+
+//Falta ord
 /*
    typedef struct nodo CANCION;
    typedef struct cab CABECERA;
