@@ -40,7 +40,7 @@ MAIN:
 
 #include "lista.h"
 #include <conio.h>
-#include "conio2.h"
+#include <conio2.h> //Conio 2.1
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>

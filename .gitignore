@@ -22,6 +22,10 @@
 *.a
 *.lib
 
+# Dev-C Trash
+*.layout
+*.win
+
 # Executables
 *.exe
 *.out
