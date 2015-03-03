@@ -26,7 +26,7 @@ void destroy(lista *);
 //Funcion que deja la lista vacia
 void clean(lista);
 //Funcion que imprime 15 elementos en la lista, si offset es 0; si es 5, imprime de la 5 a la 20
-void data(lista);
+void data(lista,int offset);
 //Funcion que imprime Rolando :D
 //void data2(lista l,int offset);
 // **************************************************

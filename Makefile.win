@@ -4,11 +4,11 @@
 CPP      = g++.exe
 CC       = gcc.exe
 WINDRES  = windres.exe
-OBJ      = iMesias-Debug.o lista.o
-LINKOBJ  = iMesias-Debug.o lista.o
-LIBS     = -L"E:/Sys/Dev-Cpp/MinGW64/lib32" -L"E:/Sys/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -L"E:/Sys/Dev-Cpp/MinGW64/lib" -L"E:/Sys/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -lconio -m32
-INCS     = -I"E:/Sys/Dev-Cpp/MinGW64/include" -I"E:/Sys/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"E:/Sys/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include"
-CXXINCS  = -I"E:/Sys/Dev-Cpp/MinGW64/include" -I"E:/Sys/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"E:/Sys/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"E:/Sys/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++"
+OBJ      = lista.o iMesias.o
+LINKOBJ  = lista.o iMesias.o
+LIBS     = -L"D:/Sys/Dev-Cpp/MinGW64/lib32" -L"D:/Sys/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib32" -L"D:/Sys/Dev-Cpp/MinGW64/lib" -L"D:/Sys/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -lconio -m32
+INCS     = -I"D:/Sys/Dev-Cpp/MinGW64/include" -I"D:/Sys/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/Sys/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include"
+CXXINCS  = -I"D:/Sys/Dev-Cpp/MinGW64/include" -I"D:/Sys/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"D:/Sys/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include" -I"D:/Sys/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.8.1/include/c++"
 BIN      = iMesias.exe
 CXXFLAGS = $(CXXINCS) -m32
 CFLAGS   = $(INCS) -m32
@@ -24,8 +24,8 @@ clean: clean-custom
 $(BIN): $(OBJ)
 	$(CC) $(LINKOBJ) -o $(BIN) $(LIBS)
 
-iMesias-Debug.o: iMesias-Debug.c
-	$(CC) -c iMesias-Debug.c -o iMesias-Debug.o $(CFLAGS)
-
 lista.o: lista.c
 	$(CC) -c lista.c -o lista.o $(CFLAGS)
+
+iMesias.o: iMesias.c
+	$(CC) -c iMesias.c -o iMesias.o $(CFLAGS)
