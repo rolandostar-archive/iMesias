@@ -26,6 +26,8 @@ myBoolean empty(lista);
 void destroy(lista *);
 void clean(lista);
 int size(lista);
+CANCION * find (lista, int);
+void edit(lista, int, CANCION);
 CANCION pop_izq(lista);
 CANCION pop_der(lista);
 mensaje push_izq(lista, CANCION);

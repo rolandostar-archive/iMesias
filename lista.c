@@ -3,8 +3,6 @@
 #include<stdlib.h>
 #include<string.h>
 
-
-//Falta ord
 /*
    typedef struct nodo CANCION;
    typedef struct cab CABECERA;
@@ -20,7 +18,49 @@
    mensaje push_der(lista, CANCION);
    mensaje push_pos(lista, int, CANCION);
 */
-
+/*
+CANCION * find (lista myList, int place){
+	CANCION * aux = myList->I;
+	int m,k=0;
+	
+	m = myList->size;
+	
+	if(m>pos)
+		while(k++ < place)
+			aux = aux->sig;
+	else{
+		aux = myList->F;
+		k = myList->size;
+		while(k-- > place)
+			aux = aux->ant;
+	}
+	
+	return aux;
+}*/
+/*
+void edit(lista myList, int place, CANCION song){
+	if(place == 0){
+		strcpy(myList->I,song.artista);
+		strcpy(myList->I,song.nombre);
+		strcpy(myList->I,song.album);
+		strcpy(myList->I,song.duracion);
+	}
+	else if(place >= myList->size - 1){
+		strcpy(myList->F,song.artista);
+		strcpy(myList->F,song.nombre);
+		strcpy(myList->F,song.album);
+		strcpy(myList->F,song.duracion);
+	}
+	else{
+		CANCION * mod = NULL;
+		mod = find(myList, place);
+		strcpy(mod->artista,song.artista);
+		strcpy(mod->nombre,song.nombre);
+		strcpy(mod->album,song.album);
+		strcpy(mod->duracion,song.duracion);
+	}
+}
+*/
 int size(lista l){
    return l->size;
 }
@@ -188,8 +228,7 @@ mensaje push_pos(lista l, int pos, CANCION song){
    else{
       
       //Pos -- poque lo manejamos de 0 a N - 1
-      pos--;
-      int k = 0;
+      int k = 1;
       //Inicialmente apunto al primer elemento
       CANCION * aux = l->I;
       // Si no he llegado a destino, me muevo

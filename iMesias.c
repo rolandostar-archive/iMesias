@@ -1,43 +1,3 @@
-/* ===================== LEGACY CODE ======================
-
-MAIN:
-
-   int n,i;
-   CANCION song;
-
-   //Meter/Sacar contrarios, cola :D
-   //Meter/Sacar iguales, pila :D
-
-   create(&myList);
-   printf("El size de la lista recien creada es %d\n",size(myList));
-   printf("Numero de elementos a pushear: "); scanf("%d",&n);
-
-   for(i=0; i<n; i++){
-      printf("Nombre Artista [Sin Espacio]: "); scanf("%s",song.artista);
-      printf("Nombre Cancion [Sin Espacio]: "); scanf("%s",song.nombre);
-      printf("Nombre Album   [Sin Espacio]: "); scanf("%s",song.album);
-      printf("Duracion       [Sin Espacio]: "); scanf("%s",song.duracion);
-      //printf("Estoy metiendo por Izquierda\n");
-      //push_izq(myList,song);
-      printf("Estoy metiendo por Derecha\n");
-      push_der(myList,song);
-      printf("----------------------------------------------------------\n");
-   }
-   printf("\n\n La lista quedo con %d elementos\n\n",size(myList));
-
-   while( !empty(myList) ){
-      song = pop_der(myList);
-      printf("-------------------------------------\n");
-      printf("Saque de IZQ, size: %d \n",size(myList));
-      //printf("Saque de DER, size: %d \n",size(myList));
-      printf("Nombre : %s \n",song.nombre);
-      printf("Artista : %s \n",song.artista);
-      printf("Album : %s \n",song.album);
-      printf("Duracion : %s \n",song.duracion);
-   }
-   
-*/// ======================================================
-
 #include "lista.h"
 #include <conio.h>
 #include <conio2.h> //Conio 2.1
@@ -58,25 +18,106 @@ int printc(const char *s);
 int doexit(int code);
 void drawUI();
 int menu(char vmenu[][11], int);
-lista myList;
+
+int printlist(char file[20],int offset){
+   char ch;
+   FILE *fp;
+ 
+   fp = fopen(file,"r"); // read mode
+   if( fp == NULL ) return -1;
+  //printf("The contents of %s file are :\n", file_name);
+ 
+   while( ( ch = fgetc(fp) ) != EOF )
+      printf("%c",ch);
+ 
+   fclose(fp);
+   return 1;
+}
+
+void append(char* s, char c)
+{
+    int len = strlen(s);
+    char buf[len+2];
+    strcpy(buf, s);
+    buf[len] = c;
+    buf[len + 1] = 0;
+    return strdup(buf);
+}
+
+int parselist(char file[20],lista myList,int offset){
+   char ch;
+   char aux[70];
+   FILE *fp;
+   CANCION cancion;
+ 
+   fp = fopen(file,"r"); // read mode
+   if( fp == NULL ) return -1;
+  //printf("The contents of %s file are :\n", file_name);
+  while( (ch=fgetc(fp)) != 95 ){
+      printf("LETRA: %c\n\n",ch);
+      append(aux,ch);
+    }
+  printf("AUX: %s\n",aux);
+  strcpy(cancion.nombre,aux);
+  /*do{
+    while( (ch=fgetc(fp)) != "_" ){
+      append(aux,ch);
+    }
+    printf("%s\n",aux);
+      strcpy(cancion.nombre,aux);
+    memset(aux,0,strlen(aux));
+    while( (ch=fgetc(fp)) != "_" ){
+      append(aux,ch);
+    }
+      printf("%s\n",aux);
+      strcpy(cancion.artista,aux);
+      memset(aux,0,strlen(aux));
+    while( (ch=fgetc(fp)) != "_" ){
+      append(aux,ch);
+    }
+    printf("%s\n",aux);
+      strcpy(cancion.album,aux);
+      memset(aux,0,strlen(aux));
+    while( (ch=fgetc(fp)) != "_" ){
+      append(aux,ch);
+    }
+    printf("%s\n",aux);
+      strcpy(cancion.duracion,aux);
+      memset(aux,0,strlen(aux));
+    if ((ch=fgetc(fp)) == "\n"){
+      push_der(myList,cancion);
+    }
+  }while (( ch = fgetc(fp) ) != EOF);*/
+   fclose(fp);
+   return 1;
+}
 
 int main(int argc, char *argv[]) {
-  int op;
+  int op,mode=0;
   SetConsoleTitle("Practica 5 - iMesias");
   char vmenu[6][11] = {
     "Biblioteca","Tus Listas","Agregar","Eliminar","Editar","Salir"
   };
+  lista myList;
+  create(&myList);
+  
+  //Imprime archivo general
+    system("COLOR 0F");
+    printf("Hola");
+  parselist("Biblioteca2.txt",myList,0); //Parsea Lista a myList
 
-  drawUI(0); // Inicializar UI
+  //drawUI(0); // Inicializar UI
+  //printlist(myList); // Imprime Lista
   gotoxy(80,22);
   _setcursortype(_NOCURSOR);
   do {
-    op = menu(vmenu,0);
+    op = menu(vmenu,mode);
     switch(op) {
       case 1: // Biblioteca
+        mode=0;
         break;
       case 2: // Tus Listas
-        menu(vmenu,1);
+        mode=1;
         break;
       case 3: // Agregar
         break;
@@ -84,11 +125,12 @@ int main(int argc, char *argv[]) {
         break;
       case 5: // Editar
         break;
-      case 27: return doexit(0); //Hacer [ESC]
+      case 6: return doexit(1); //Hacer [ESC]
+      case 27: return doexit(1);
       default: break;
     }
   } while (op!=6); // Salir
-  return doexit(1);
+  return doexit(0);
 } // Fin de Main
 
 int doexit(int code){ // Formateo mamon
@@ -106,8 +148,8 @@ int menu(char vmenu[][11],int mode){
   int Y[6]={9,11,15,17,19,21};
   // Y: Coordenadas
 
-  drawUI(mode+1);
   textcolor(WHITE); textbackground(LIGHTBLUE);
+  drawUI(mode+1);
   while((key = _getch()) != 27){
     if (key == 0 || key == 224){ // Si getch() es tecla especial
       switch(key = getch()){ // Obetener segundo getch.
@@ -172,7 +214,7 @@ void drawUI(int mode){
     textcolor(WHITE);
     gotoxy(2,13); for(i=0;i<=15;i++) printf("=");
     gotoxy(4,11); printf("Tus Listas");
-    gotoxy(3,9); printf("Biblioteca");
+    gotoxy(4,9); printf("Biblioteca");
     gotoxy(4,15); printf("Agregar");
     gotoxy(4,17); printf("Eliminar");
     gotoxy(4,19); printf("Editar");
@@ -192,6 +234,8 @@ void drawUI(int mode){
   } // Fin de if(mode==0)
 }
 
+
+
 int printc(const char *s) {
   int n = strlen(s); int width = 80; // Ancho de la consola. Por defecto: 80
   int pad = (n >= width) ? 0 : (width - n) / 2;
@@ -199,3 +243,4 @@ int printc(const char *s) {
   //printf("%d\n",pad); // Debug
   return pad; // En caso de necesitar coordenadas.
 }
+
