@@ -36,60 +36,56 @@ int printlist(char file[20],int offset){
 
 void append(char* s, char c)
 {
-    int len = strlen(s);
-    char buf[len+2];
-    strcpy(buf, s);
-    buf[len] = c;
-    buf[len + 1] = 0;
-    return strdup(buf);
+  char temp[2]; 
+  temp[0] = c; 
+  temp[1] = '\0'; 
+  strcat( s, temp );
 }
 
-int parselist(char file[20],lista myList,int offset){
+void parselist(char file[20],lista myList,int offset){
+  int done=0;
    char ch;
-   char aux[70];
+   char aux[70]="";
    FILE *fp;
    CANCION cancion;
  
    fp = fopen(file,"r"); // read mode
-   if( fp == NULL ) return -1;
-  //printf("The contents of %s file are :\n", file_name);
-  while( (ch=fgetc(fp)) != 95 ){
-      printf("LETRA: %c\n\n",ch);
+   if( fp == NULL ) return;
+
+  do{
+    while( (ch=fgetc(fp)) != 95 ){
       append(aux,ch);
     }
-  printf("AUX: %s\n",aux);
-  strcpy(cancion.nombre,aux);
-  /*do{
-    while( (ch=fgetc(fp)) != "_" ){
-      append(aux,ch);
-    }
-    printf("%s\n",aux);
+    //printf("NOMBRE: %s\n",aux);
       strcpy(cancion.nombre,aux);
     memset(aux,0,strlen(aux));
-    while( (ch=fgetc(fp)) != "_" ){
+    while( (ch=fgetc(fp)) != 95 ){
       append(aux,ch);
     }
-      printf("%s\n",aux);
+     // printf("ARTISTA: %s\n",aux);
       strcpy(cancion.artista,aux);
       memset(aux,0,strlen(aux));
-    while( (ch=fgetc(fp)) != "_" ){
+    while( (ch=fgetc(fp)) != 95 ){
       append(aux,ch);
     }
-    printf("%s\n",aux);
+    //printf("ALBUM: %s\n",aux);
       strcpy(cancion.album,aux);
       memset(aux,0,strlen(aux));
-    while( (ch=fgetc(fp)) != "_" ){
+    while( (ch=fgetc(fp)) != '\n' ){
       append(aux,ch);
     }
-    printf("%s\n",aux);
+    //printf("DUYRACION: %s\n\n",aux);
       strcpy(cancion.duracion,aux);
       memset(aux,0,strlen(aux));
-    if ((ch=fgetc(fp)) == "\n"){
       push_der(myList,cancion);
+    if (ch=='\n'&&(ch=fgetc(fp)) == EOF ){
+      return;
+    }else{
+      append(aux,ch);
     }
-  }while (( ch = fgetc(fp) ) != EOF);*/
+  }while(ch!=EOF);
    fclose(fp);
-   return 1;
+  return;
 }
 
 int main(int argc, char *argv[]) {

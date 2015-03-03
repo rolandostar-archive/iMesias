@@ -99,6 +99,31 @@ myBoolean empty( lista q ){
    return FALSE;
 }
 
+void data(lista l){
+	//Si vacia, hago nada
+	if(l->I == NULL)
+		return;
+	//Si no, recorro desde el inicio ( aux ) hasta el final
+	CANCION * aux = l->I;
+	//Esto no entra cuando aux = fin
+	while( aux != l->F){
+		printf("********************************\n");
+		printf("Artista : %s\n",aux->artista);
+		printf("Cancion : %s\n",aux->nombre);
+		printf("Album   : %s\n",aux->album);
+		printf("Duracion: %s\n",aux->duracion);
+		aux = aux->sig;
+	}
+	//Falta el ultimo, plt, lo imprimo
+	printf("********************************\n");
+	printf("Artista : %s\n",aux->artista);
+	printf("Cancion : %s\n",aux->nombre);
+	printf("Album   : %s\n",aux->album);
+	printf("Duracion: %s\n",aux->duracion);
+	printf("********************************\n");
+	return;
+}
+
 CANCION pop_der(lista l){
    CANCION temp;
    //cancion que voy a regresar
