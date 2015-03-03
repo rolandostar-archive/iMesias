@@ -2,24 +2,17 @@
 #define LISTA_H
 
 struct nodo{
-	//Para el campo Artista de la cancion
-	char artista[70];
-	//Para el campo Artista de la cancion
-	char nombre[70];
-	//Para el campo Artista de la cancion
-	char album[70];
-	//Para el campo Artista de la cancion
-	char duracion[5];
-	//Apuntadores para conectar la cancion con otras canciones
-	struct nodo * sig;
-	struct nodo * ant;
+    char artista[70];
+    char nombre[70];
+    char album[70];
+    char duracion[5];
+    struct nodo * sig;
+    struct nodo * ant;
 };
 
-//Lista en sí, apuntadores a nodos, en inicio y fin. Además
-//de un campo size que lleva el tamaño de la lista
 struct cab{
-	struct nodo *I, *F;
-	int size;
+    struct nodo *I, *F;
+    int size;
 };
 
 typedef struct nodo CANCION;

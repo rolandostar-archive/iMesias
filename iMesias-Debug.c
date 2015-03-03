@@ -57,5 +57,6 @@ int main(){
 
    sort(myList,0);
    data(myList);
+
    return 0;
 }
