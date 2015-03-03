@@ -113,9 +113,10 @@ int i,j;
 	 aux = aux->sig;
 	}
 	int x=19,y=8;
-	gotoxy(x,y);
 	//Esto no entra cuando aux = fin
   for (i=0;i<15;i++){
+    gotoxy(x,y);
+    
 		/*printf("********************************\n");
 		printf("Artista : %s\n",aux->artista);
 		printf("Cancion : %s\n",aux->nombre);
