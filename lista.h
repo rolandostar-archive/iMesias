@@ -41,7 +41,7 @@ void destroy(lista *);
 void clean(lista);
 
 //Funcion que imprime CADA elemento en la lista
-void data(lista);
+void data(lista,int offset);
 
 //Funcion que regresa el tamaño de la lista
 int size(lista);

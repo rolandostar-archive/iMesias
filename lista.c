@@ -99,28 +99,47 @@ myBoolean empty( lista q ){
    return FALSE;
 }
 
-void data(lista l){
+void data(lista l,int offset){
+  //contador (final)
+int i,j;
+  //ofseet es el inicio, (empieza en cero)
+  
 	//Si vacia, hago nada
 	if(l->I == NULL)
 		return;
 	//Si no, recorro desde el inicio ( aux ) hasta el final
 	CANCION * aux = l->I;
+	for(j=0;j<offset-1;j++){
+	 aux = aux->sig;
+	}
+	int x=19,y=8;
+	gotoxy(x,y);
 	//Esto no entra cuando aux = fin
-	while( aux != l->F){
-		printf("********************************\n");
+  for (i=0;i<15;i++){
+		/*printf("********************************\n");
 		printf("Artista : %s\n",aux->artista);
 		printf("Cancion : %s\n",aux->nombre);
 		printf("Album   : %s\n",aux->album);
-		printf("Duracion: %s\n",aux->duracion);
+		printf("Duracion: %s\n",aux->duracion);*/
+	  printf("%.*s", 20, aux->nombre);
+	  gotoxy(x+20,y); printf("|");
+	  printf("%.*s", 20, aux->artista);
+	  gotoxy(x+40,y); printf("|");
+	  printf("%.*s", 15, aux->album);
+	  gotoxy(x+55,y); printf("|");
+	  printf("%.*s", 5, aux->duracion);
+	  gotoxy(x,++y);
 		aux = aux->sig;
 	}
+	
 	//Falta el ultimo, plt, lo imprimo
+	/*
 	printf("********************************\n");
 	printf("Artista : %s\n",aux->artista);
 	printf("Cancion : %s\n",aux->nombre);
 	printf("Album   : %s\n",aux->album);
 	printf("Duracion: %s\n",aux->duracion);
-	printf("********************************\n");
+	printf("********************************\n");*/
 	return;
 }
 

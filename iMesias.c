@@ -17,7 +17,7 @@
 int printc(const char *s);
 int doexit(int code);
 void drawUI();
-int menu(char vmenu[][11], int);
+int menu(char vmenu[][11],lista, int);
 
 int printlist(char file[20],int offset){
    char ch;
@@ -98,16 +98,15 @@ int main(int argc, char *argv[]) {
   create(&myList);
   
   //Imprime archivo general
-    system("COLOR 0F");
-    printf("Hola");
   parselist("Biblioteca2.txt",myList,0); //Parsea Lista a myList
 
-  //drawUI(0); // Inicializar UI
+  drawUI(0); // Inicializar UI
   //printlist(myList); // Imprime Lista
+  data(myList,3);
   gotoxy(80,22);
   _setcursortype(_NOCURSOR);
   do {
-    op = menu(vmenu,mode);
+    op = menu(vmenu,myList,mode);
     switch(op) {
       case 1: // Biblioteca
         mode=0;
@@ -135,9 +134,10 @@ int doexit(int code){ // Formateo mamon
   gotoxy(80,22); return code;
 }
 
-int menu(char vmenu[][11],int mode){
+int menu(char vmenu[][11],lista myList,int mode){
   // Mode: 0 para biblioteca, 1 para Tus listas
   int key=0,op=1,i=mode;
+  int offset=0;
   // key: Tecla presionada
   // op: Opcion
   // i: contador de posicion (cursor)
@@ -160,8 +160,11 @@ int menu(char vmenu[][11],int mode){
           gotoxy(3,Y[i]); printf("[%s] ",vmenu[i]);
           break;
         case AV_PAG:
+          data(myList,--offset);
           break;
         case RE_PAG:
+          gotoxy(19,8);
+          data(myList,++offset);
           break;
         default: break;
       }
