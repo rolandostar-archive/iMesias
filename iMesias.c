@@ -102,7 +102,9 @@ int main(int argc, char *argv[]) {
 
   drawUI(0); // Inicializar UI
   //printlist(myList); // Imprime Lista
-  data(myList,3);
+  textbackground(LIGHTBLUE);
+textcolor(WHITE);
+  //data(myList,0);
   gotoxy(80,22);
   _setcursortype(_NOCURSOR);
   do {
@@ -137,13 +139,13 @@ int doexit(int code){ // Formateo mamon
 int menu(char vmenu[][11],lista myList,int mode){
   // Mode: 0 para biblioteca, 1 para Tus listas
   int key=0,op=1,i=mode;
-  int offset=0;
+  int offset=0,sizel=0;
   // key: Tecla presionada
   // op: Opcion
   // i: contador de posicion (cursor)
   int Y[6]={9,11,15,17,19,21};
   // Y: Coordenadas
-
+  sizel=size(myList);
   textcolor(WHITE); textbackground(LIGHTBLUE);
   drawUI(mode+1);
   while((key = _getch()) != 27){
@@ -160,11 +162,18 @@ int menu(char vmenu[][11],lista myList,int mode){
           gotoxy(3,Y[i]); printf("[%s] ",vmenu[i]);
           break;
         case AV_PAG:
-          data(myList,--offset);
+        
+          if (offset<(sizel-15)) offset++;
+          gotoxy(19,8);
+          data(myList,offset);
+          printf("%d",offset);
           break;
         case RE_PAG:
+        
+         if (offset<(sizel-15)) offset=offset-1;
           gotoxy(19,8);
-          data(myList,++offset);
+          data(myList,offset);
+          printf("%d",offset);
           break;
         default: break;
       }

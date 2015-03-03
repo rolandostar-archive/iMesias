@@ -50,18 +50,8 @@ ProductVersion=
 AutoIncBuildNr=0
 SyncProduct=1
 
-[Unit1]
-FileName=iMesias.c
-CompileCpp=0
-Folder=
-Compile=1
-Link=1
-Priority=1000
-OverrideBuildCmd=0
-BuildCmd=
-
 [Unit2]
-FileName=lista.c
+FileName=iMesias-Debug.c
 CompileCpp=0
 Folder=
 Compile=1
@@ -71,6 +61,26 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
+FileName=lista.c
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit4]
+FileName=iMesias-Debug.c
+CompileCpp=0
+Folder=
+Compile=1
+Link=1
+Priority=1000
+OverrideBuildCmd=0
+BuildCmd=
+
+[Unit1]
 FileName=lista.h
 CompileCpp=0
 Folder=
