@@ -42,7 +42,7 @@ void append(char* s, char c)
   strcat( s, temp );
 }
 
-void parselist(char file[20],lista myList,int offset){
+lista parselist(char file[20],lista myList){
   int done=0;
    char ch;
    char aux[70]="";
@@ -50,7 +50,6 @@ void parselist(char file[20],lista myList,int offset){
    CANCION cancion;
  
    fp = fopen(file,"r"); // read mode
-   if( fp == NULL ) return;
 
   do{
     while( (ch=fgetc(fp)) != 95 ){
@@ -98,13 +97,12 @@ int main(int argc, char *argv[]) {
   create(&myList);
   
   //Imprime archivo general
-  parselist("Biblioteca2.txt",myList,0); //Parsea Lista a myList
-
   drawUI(0); // Inicializar UI
   //printlist(myList); // Imprime Lista
   textbackground(LIGHTBLUE);
 textcolor(WHITE);
-  //data(myList,0);
+parselist("Biblioteca2.txt",myList);
+  data(myList,0);
   gotoxy(80,22);
   _setcursortype(_NOCURSOR);
   do {
@@ -139,7 +137,7 @@ int doexit(int code){ // Formateo mamon
 int menu(char vmenu[][11],lista myList,int mode){
   // Mode: 0 para biblioteca, 1 para Tus listas
   int key=0,op=1,i=mode;
-  int offset=0,sizel=0;
+  int offset=1,sizel=0;
   // key: Tecla presionada
   // op: Opcion
   // i: contador de posicion (cursor)
@@ -162,18 +160,12 @@ int menu(char vmenu[][11],lista myList,int mode){
           gotoxy(3,Y[i]); printf("[%s] ",vmenu[i]);
           break;
         case AV_PAG:
-        
           if (offset<(sizel-15)) offset++;
-          gotoxy(19,8);
           data(myList,offset);
-          printf("%d",offset);
           break;
         case RE_PAG:
-        
-         if (offset<(sizel-15)) offset=offset-1;
-          gotoxy(19,8);
+         if (offset>0) offset=offset-1;
           data(myList,offset);
-          printf("%d",offset);
           break;
         default: break;
       }

@@ -73,6 +73,7 @@ int i,j;
 	 aux = aux->sig;
 	}
 	int x=19,y=8;
+	gotoxy(19,8);
 	//Esto no entra cuando aux = fin
   for (i=0;i<15;i++){
 	  clreol(); printf(" %.*s", 17, aux->nombre);
@@ -211,7 +212,6 @@ lista search(lista myList, int element, char * cad){
 
    return result;
 }
-
 
 CANCION * find (lista myList, int place){
 	//inicialmente mi apuntador ve al inicio
