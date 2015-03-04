@@ -3,7 +3,6 @@
 #include<stdlib.h>
 #include<string.h>
 
-
 void destroy( lista * q ){
    clean(*q);
    free(*q);
@@ -58,12 +57,34 @@ void clean( lista q ){
    q-> F = NULL;
 }
 
+void data_full(lista l){
+	if(l->I == NULL)
+		return;
+	CANCION * aux = l->I;
+	while( aux != l->F){
+		printf("********************************\n");
+		printf("Cancion : %s\n",aux->nombre);
+		printf("Artista : %s\n",aux->artista);
+		printf("Album   : %s\n",aux->album);
+		printf("Duracion: %s\n",aux->duracion);
+		aux = aux->sig;
+	}
+	//Falta el ultimo
+	printf("********************************\n");
+   printf("Cancion : %s\n",aux->nombre);
+   printf("Artista : %s\n",aux->artista);
+	printf("Album   : %s\n",aux->album);
+	printf("Duracion: %s\n",aux->duracion);
+	printf("********************************\n");
+	return;
+}
+
 void data(lista l,int offset){
 
   //contador (final)
 int i,j;
   //ofseet es el inicio, (empieza en cero)
-  
+
 	//Si vacia, hago nada
 	if(l->I == NULL)
 		return;
@@ -89,20 +110,43 @@ int i,j;
 	return;
 }
 
-
+int compare(CANCION A, CANCION B, int element){
+  if(element == 0 ){
+   if( !strncmp(A.nombre,B.nombre,70) )
+      if( !strncmp(A.artista,B.artista,70) )
+         return strncmp(A.album,B.album,70);
+      return strncmp(A.artista,B.artista,70);
+   return strncmp(A.nombre,B.nombre,70);
+  }
+  else if(element == 1){
+    if( !strncmp(A.artista,B.artista,70) )
+      if( !strncmp(A.nombre,B.nombre,70) )
+         return strncmp(A.album,B.album,70);
+      return strncmp(A.nombre,B.nombre,70);
+    return strncmp(A.artista,B.artista,70);
+  }
+  else if(element == 2){
+    if( !strncmp(A.album,B.album,70) )
+      if( !strncmp(A.artista,B.artista,70) )
+         return strncmp(A.nombre,B.nombre,70);
+      return strncmp(A.artista,B.artista,70);
+   return strncmp(A.album,B.album,70);
+  }
+}
 
 void sort(lista myList, int element){
   int ini, index;
   CANCION * aux, * lugar;
   CANCION temp;
-  
+
   lugar = myList -> I;
   aux = lugar->sig;
   index = 0;
-  
+
   while(lugar != myList->F){
+    temp = *lugar;
     for(ini = index+1; ini < size(myList); ini++){
-      if( compare(*lugar, *aux, element) ){
+      if( compare(temp, *aux, element) ){
         temp = *aux;
         edit(myList,ini,*lugar);
         edit(myList,index, temp);
@@ -113,32 +157,6 @@ void sort(lista myList, int element){
     lugar = lugar->sig;
     aux = lugar->sig;
   }
-}
-
-int compare(CANCION A, CANCION B, int element){
-  char * a,b,c,d,e,f;
-  if(element == 0 ){
-    strcpy(a,A.nombre); strcpy(b,B.nombre);
-    strcpy(c,A.artista); strcpy(d,B.artista);
-    strcpy(e,A.album); strcpy(f,B.album);
-  }
-  else if(element == 1){
-    strcpy(c,A.nombre); strcpy(d,B.nombre);
-    strcpy(a,A.artista); strcpy(b,B.artista);
-    strcpy(e,A.album); strcpy(f,B.album);
-  }
-  else if(element == 2){
-    strcpy(e,A.nombre); strcpy(f,B.nombre);
-    strcpy(c,A.artista); strcpy(d,B.artista);
-    strcpy(a,A.album); strcpy(b,B.album);
-  }
-  
-  if( !strcmp(a,b) )
-    if( !strcmp(c,d) )
-      return strcmp(e,f);
-    return strcmp(c,d);
-  return strcmp(a,b);
-  
 }
 
 int size(lista l){
@@ -154,7 +172,7 @@ myBoolean empty( lista q ){
 
 lista search(lista myList, int element, char * cad){
 
-   //Primero que no esté vacía
+   //Primero que no estÃ© vacÃ­a
    printf("*********************Si entre :D Funcion Search \n\n");
 
    CANCION * ptr = myList -> I;
@@ -166,7 +184,7 @@ lista search(lista myList, int element, char * cad){
    while( ptr != myList->F){
       switch(element){
          case 0:
-            if( !strcmp(ptr->nombre,cad) ){
+            if( !strncmp(ptr->nombre,cad,70) ){
                temp = *ptr;
                temp.sig = temp.ant = NULL;
                push_der(result,temp);
@@ -174,7 +192,7 @@ lista search(lista myList, int element, char * cad){
          break;
 
          case 1:
-            if( !strcmp(ptr->artista,cad) ){
+            if( !strncmp(ptr->artista,cad,70) ){
                temp = *ptr;
                temp.sig = temp.ant = NULL;
                push_der(result,temp);
@@ -182,7 +200,7 @@ lista search(lista myList, int element, char * cad){
          break;
 
          case 2:
-            if( !strcmp(ptr->album,cad) ){
+            if( !strncmp(ptr->album,cad,70) ){
                temp = *ptr;
                temp.sig = temp.ant = NULL;
                push_der(result,temp);
@@ -191,17 +209,17 @@ lista search(lista myList, int element, char * cad){
       }
       ptr = ptr->sig;
    }
-   if( !strcmp(myList->F->nombre,cad) && !element){
+   if( !strncmp(myList->F->nombre,cad,70) && !element){
       temp = *(myList->F);
       temp.sig = temp.ant = NULL;
       push_der(result,temp);
    }
-   else if( !strcmp(myList->F->artista,cad) && element == 1){
+   else if( !strncmp(myList->F->artista,cad,70) && element == 1){
       temp = *(myList->F);
       temp.sig = temp.ant = NULL;
       push_der(result,temp);
    }
-   else if( !strcmp(myList->F->album,cad) && element == 2){
+   else if( !strncmp(myList->F->album,cad,70) && element == 2){
       temp = *(myList->F);
       temp.sig = temp.ant = NULL;
       push_der(result,temp);
