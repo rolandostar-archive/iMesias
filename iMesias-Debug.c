@@ -30,6 +30,11 @@ int main(){
    }
    printf("\n\n La lista quedo con %d elementos\n\n",size(myList));
 
+   sort(myList,0);
+   data_full(myList);
+
+   printf("\n\n**********************************************\n\n");
+
    /*
    printf("Edita uno, dame pos: "); scanf("%d",&pos);
    printf("Data para la modificacion: ");
@@ -42,21 +47,29 @@ int main(){
    data(myList);
    */
 
-   //char text[70];
+   char text[70];
    //printf("Elemento de NOMBRE CANCION a buscar: ");
-   //printf("Elemento de NOMBRE ARTISTA a buscar: ");
+   printf("Elemento de NOMBRE ARTISTA a buscar: ");
    //printf("Elemento de NOMBRE ALBUM a buscar: ");
-   //scanf("%s",text);
+   scanf("%s",text);
 
    // 0 para canciones  1 para Artistas y  2 para Album
       //lista test = Search(myList,0,text);
-   //lista test = search(myList,2,text);
+   lista test = search(myList,1,text);
 
-   //if(!empty(test))
-   //data(test);
+   if(!empty(test))
+   data_full(test);
 
-   sort(myList,0);
-   data(myList);
-
+   /*while( !empty(myList) ){
+      song = pop_izq(myList);
+      //song = pop_der(myList);
+      printf("-------------------------------------\n");
+      printf("Saque de IZQ, size: %d \n",size(myList));
+      //printf("Saque de DER, size: %d \n",size(myList));
+      printf("Nombre : %s \n",song.nombre);
+      printf("Artista : %s \n",song.artista);
+      printf("Album : %s \n",song.album);
+      printf("Duracion : %s \n",song.duracion);
+   }*/
    return 0;
 }
